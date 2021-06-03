@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BlockchainService } from 'src/app/services/blockchain.service';
-import { BlockViewComponent } from '../../component/block-view/block-view.component';
 @Component({
   selector: 'app-blockchain-viewer',
   templateUrl: './blockchain-viewer.component.html',
@@ -9,12 +8,18 @@ import { BlockViewComponent } from '../../component/block-view/block-view.compon
 export class BlockchainViewerComponent implements OnInit {
 
   public blocks = [];
+  public selectedBlock = null;
   constructor(private blockChainService: BlockchainService)  { 
     this.blocks = blockChainService.getBlocks();
+    this.selectedBlock = this.blocks[0];
     console.log(JSON.stringify(this.blocks, null, 2));
   }
 
   ngOnInit(): void {
+  }
+
+  showTransactions(block) {
+    this.selectedBlock = block;
   }
 
 }
